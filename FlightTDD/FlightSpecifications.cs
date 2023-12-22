@@ -15,5 +15,18 @@ namespace FlightTDD
             flight.RemainingNumberOfSeats.Should().Be(2);
 
         }
+
+        [Fact]
+        public void Avoids_overbooking()
+        {
+            //Given
+            var flight = new Flight(seatCapacity: 3);
+
+            //When
+            var error = flight.Book("dimiporf@live.com", 4);
+
+            //Then
+            error.Should().BeOfType<OverbookingError>();
+        }
     }
 }
