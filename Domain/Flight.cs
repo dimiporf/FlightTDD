@@ -15,12 +15,14 @@
                 return new OverbookingError();
             }
 
-            //RemainingNumberOfSeats -= numberOfSeats;
+            RemainingNumberOfSeats -= numberOfSeats;
 
-            RemainingNumberOfSeats = 2;
+            //Devil's Advocate example #2
+            //RemainingNumberOfSeats = 2;
 
             return null;
 
+            //Devil's Advocate example #1
             //return new OverbookingError();
         }
     }
