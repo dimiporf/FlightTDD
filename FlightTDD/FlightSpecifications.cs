@@ -5,6 +5,20 @@ namespace FlightTDD
 {
     public class FlightSpecifications
     {
+        [Theory]
+        [InlineData(3, 1, 2)]
+        [InlineData(6, 3, 3)]
+        [InlineData(10, 6, 4)]
+        public void Booking_reduces_the_number_of_seats_Parameterized(int seatCapacity, int numberOfSeats, int remainingNumberOfSeats)
+        {
+            var flight = new Flight(seatCapacity: seatCapacity);
+
+            flight.Book("dimiporf@live.com", numberOfSeats);
+
+            flight.RemainingNumberOfSeats.Should().Be(remainingNumberOfSeats);
+
+        }
+
         [Fact]
         public void Booking_reduces_the_number_of_seats()
         {
