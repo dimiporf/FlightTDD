@@ -28,6 +28,17 @@ namespace FlightTDD
         }
 
         [Fact]
+        public void Booking_reduces_the_number_of_seats_3()
+        {
+            var flight = new Flight(seatCapacity: 10);
+
+            flight.Book("dimiporf@live.com", 6);
+
+            flight.RemainingNumberOfSeats.Should().Be(4);
+
+        }
+
+        [Fact]
         public void Avoids_overbooking()
         {
             //Given

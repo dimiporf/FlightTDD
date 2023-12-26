@@ -17,6 +17,10 @@
 
             RemainingNumberOfSeats -= numberOfSeats;
 
+            //Devil's Advocate example #3
+            //if (numberOfSeats == 1) RemainingNumberOfSeats = 2;
+            //if (numberOfSeats == 3) RemainingNumberOfSeats = 3;
+
             //Devil's Advocate example #2
             //RemainingNumberOfSeats = 2;
 
