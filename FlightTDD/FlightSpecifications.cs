@@ -66,15 +66,19 @@ namespace FlightTDD
             error.Should().BeNull();
         }
 
-
+        // Test to verify that the flight remembers bookings
         [Fact]
         public void Remembers_bookings()
         {
+            // Arrange: Create a flight with a seat capacity of 150
             var flight = new Flight(seatCapacity: 150);
 
+            // Act: Book 4 seats
             flight.Book(passengerEmail: "dimiporf@live.com", numberOfSeats: 4);
 
+            // Assert: Check that the booking list contains an equivalent booking
             flight.BookingList.Should().ContainEquivalentOf(new Booking("dimiporf@live.com", 4));
         }
+
     }
 }

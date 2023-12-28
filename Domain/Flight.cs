@@ -2,7 +2,15 @@
 {
     public class Flight
     {
-        public List<Booking> BookingList { get; set; } = new List<Booking>();
+        // List to store booking information for the flight
+        List<Booking> bookingList = new();
+
+        // Public property exposing the booking list (read-only)
+        public IEnumerable<Booking> BookingList => bookingList;
+        
+
+        //This is the old instanciation of BookingList before refactoring
+        //public List<Booking> BookingList { get; set; } = new List<Booking>();
 
         // The number of remaining seats on the flight
         public int RemainingNumberOfSeats { get; set; }
@@ -26,7 +34,8 @@
             // Reduce the number of remaining seats based on the booking
             RemainingNumberOfSeats -= numberOfSeats;
 
-            BookingList.Add(new Booking(passengerEmail, numberOfSeats));
+            // Add a new booking to the booking list
+            bookingList.Add(new Booking(passengerEmail, numberOfSeats));
 
             // Devil's Advocate examples (commented out for normal functionality)
             // Uncomment these lines to simulate alternative scenarios for testing
