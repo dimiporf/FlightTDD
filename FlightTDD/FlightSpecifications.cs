@@ -83,6 +83,7 @@ namespace FlightTDD
         [Theory]
         [InlineData(3,1,1,3)]
         [InlineData(4, 2, 2, 4)]
+        [InlineData(7, 5, 4, 6)]
         public void Canceling_bookings_frees_up_the_seats(
             int initialCapacity,
             int numberOfSeatsToBook,
