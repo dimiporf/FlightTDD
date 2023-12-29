@@ -91,13 +91,16 @@ namespace FlightTDD
             int remainingNumberOfSeats
             )
         {
-            
+            // Arrange: Create a flight with the specified initial capacity
             var flight = new Flight(initialCapacity);
 
+            // Act: Book a certain number of seats
             flight.Book(passengerEmail: "dimiporf@live.com", numberOfSeats: numberOfSeatsToBook);
 
+            // Act: Cancel a certain number of seats
             flight.CancelBooking(passengerEmail: "dimiporf@live.com", numberOfSeats: numberOfSeatsToCancel);
 
+            // Assert: Check that the remaining number of seats matches the expected value
             flight.RemainingNumberOfSeats.Should().Be(remainingNumberOfSeats);
         }
 

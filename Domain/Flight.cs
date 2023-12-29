@@ -57,7 +57,12 @@ namespace Domain
 
         public void CancelBooking(string passengerEmail, int numberOfSeats)
         {
+            // Increase the remaining number of seats by the number of seats being canceled
             RemainingNumberOfSeats += numberOfSeats;
+            // Note: In a real-world scenario, you might want to include additional logic or validation here.
+            // For example, checking if the passengerEmail corresponds to an existing booking,
+            // and handling cases where the numberOfSeats to cancel is greater than the booked seats.
+            // This comment is just a placeholder for such considerations.
         }
     }
 }
