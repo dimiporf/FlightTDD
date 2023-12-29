@@ -80,5 +80,18 @@ namespace FlightTDD
             flight.BookingList.Should().ContainEquivalentOf(new Booking("dimiporf@live.com", 4));
         }
 
+        [Fact]
+        public void Canceling_bookings_frees_up_the_seats()
+        {
+            
+            var flight = new Flight(3);
+
+            flight.Book(passengerEmail: "dimiporf@live.com", numberOfSeats:1);
+
+            flight.CancelBooking(passengerEmail: "dimiporf@live.com", numberOfSeats: 1);
+
+            flight.RemainingNumberOfSeats.Should().Be(3);
+        }
+
     }
 }

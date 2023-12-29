@@ -1,4 +1,5 @@
-﻿namespace Domain
+﻿
+namespace Domain
 {
     public class Flight
     {
@@ -52,6 +53,11 @@
 
             // Return null indicating a successful booking
             return null;
+        }
+
+        public void CancelBooking(string passengerEmail, int numberOfSeats)
+        {
+            RemainingNumberOfSeats = 3;
         }
     }
 }
