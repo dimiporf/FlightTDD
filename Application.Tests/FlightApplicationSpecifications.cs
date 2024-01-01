@@ -33,10 +33,9 @@ namespace Application.Tests
         // Simulates finding bookings
         public IEnumerable<BookingRm> FindBookings()
         {
-            throw new NotImplementedException();
-            // Note: This method is not implemented, and it throws a NotImplementedException.
             // In a real-world scenario, this method would query the database or other storage to retrieve bookings.
-
+            // For now, let's return a dummy collection containing a BookingRm object.
+            return new[] { new BookingRm() };
         }
     }
 
