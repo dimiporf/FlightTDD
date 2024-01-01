@@ -104,5 +104,15 @@ namespace FlightTDD
             flight.RemainingNumberOfSeats.Should().Be(remainingNumberOfSeats);
         }
 
+        [Fact]
+        public void Doesnt_cancel_bookings_for_passengers_who_have_not_booked()
+        {
+            var flight = new Flight(3);
+
+            var error = flight.CancelBooking(passengerEmail: "porfiro@ro.com", numberOfSeats: 2);
+
+            error.Should().BeOfType<BookingNotFoundError>();
+        }
+
     }
 }
