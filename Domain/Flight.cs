@@ -65,6 +65,7 @@ namespace Domain
             // This comment is just a placeholder for such considerations.
 
 
+            // Additionally, returning a new BookingNotFoundError as a placeholder for the error scenario.
             return new BookingNotFoundError();
         }
 

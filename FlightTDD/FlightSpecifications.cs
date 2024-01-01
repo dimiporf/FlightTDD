@@ -107,12 +107,18 @@ namespace FlightTDD
         [Fact]
         public void Doesnt_cancel_bookings_for_passengers_who_have_not_booked()
         {
+            // Arrange: Create a flight with a seat capacity of 3
             var flight = new Flight(3);
 
+            // Act: Attempt to cancel 2 seats for a passenger who has not booked
             var error = flight.CancelBooking(passengerEmail: "porfiro@ro.com", numberOfSeats: 2);
 
+            // Assert: Check that the error returned is of type BookingNotFoundError
             error.Should().BeOfType<BookingNotFoundError>();
+            // Note: This test ensures that an attempt to cancel seats for a passenger who has not booked results in a BookingNotFoundError.
+            // It's verifying that the cancellation operation handles the case of a non-existing booking appropriately.
         }
+
 
     }
 }
