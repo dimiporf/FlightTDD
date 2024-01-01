@@ -119,6 +119,22 @@ namespace FlightTDD
             // It's verifying that the cancellation operation handles the case of a non-existing booking appropriately.
         }
 
+        [Fact]
+        public void Returns_null_when_successfully_cancels_a_booking()
+        {
+            // Arrange: Create a flight with a seat capacity of 3
+            var flight = new Flight(3);
 
+            // Act: Book 1 seat for a passenger
+            flight.Book(passengerEmail: "dimiporf@live.com", numberOfSeats: 1);
+
+            // Act: Attempt to cancel 1 seat for the same passenger
+            var error = flight.CancelBooking(passengerEmail: "dimiporf@live.com", numberOfSeats: 1);
+
+            // Assert: Check that no error is returned (null) when successfully canceling a booking
+            error.Should().BeNull();
+            // Note: This test ensures that no error is returned when attempting to cancel seats for a passenger who has booked successfully.
+            // It verifies that the cancellation operation works as expected without encountering errors.
+        }
     }
 }

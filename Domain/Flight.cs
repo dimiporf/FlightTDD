@@ -57,6 +57,13 @@ namespace Domain
 
         public object? CancelBooking(string passengerEmail, int numberOfSeats)
         {
+
+            // Additionally, returning a new BookingNotFoundError as a placeholder for the error scenario.
+            if (!bookingList.Any(booking => booking.Email == passengerEmail))
+                return new BookingNotFoundError();
+            
+            
+            
             // Increase the remaining number of seats by the number of seats being canceled
             RemainingNumberOfSeats += numberOfSeats;
             // Note: In a real-world scenario, you might want to include additional logic or validation here.
@@ -65,8 +72,8 @@ namespace Domain
             // This comment is just a placeholder for such considerations.
 
 
-            // Additionally, returning a new BookingNotFoundError as a placeholder for the error scenario.
-            return new BookingNotFoundError();
+            // Remake the outcome of the initial return to null, so the logic is implemented.
+            return null;
         }
 
         
