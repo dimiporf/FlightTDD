@@ -7,9 +7,13 @@ namespace Application.Tests
         [Fact]
         public void Books_flights()
         {
+            
+            
             var entities = new Entities();
+            entities.Flights.Add(new Flight(3));
+
             // Arrange: Create an instance of the BookingService
-            var bookingService = new BookingService();
+            var bookingService = new BookingService(entities: entities);
 
             // Act: Invoke the Book method on the BookingService with a dummy BookDto
             bookingService.Book(new BookDto(
@@ -31,6 +35,11 @@ namespace Application.Tests
 
     public class BookingService
     {
+        public BookingService(Entities entities)
+        {
+            
+        }
+
         // Simulates the booking process
         public void Book(BookDto bookDto)
         {
