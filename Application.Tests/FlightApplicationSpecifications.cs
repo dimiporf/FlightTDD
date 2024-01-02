@@ -7,7 +7,7 @@ namespace Application.Tests
         [Fact]
         public void Books_flights()
         {
-
+            var entities = new Entities();
             // Arrange: Create an instance of the BookingService
             var bookingService = new BookingService();
 
