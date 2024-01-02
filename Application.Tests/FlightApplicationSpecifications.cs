@@ -1,5 +1,6 @@
 using Domain;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Tests
 {
@@ -9,7 +10,9 @@ namespace Application.Tests
         public void Books_flights()
         {
             // Arrange: Create an instance of the Entities DbContext
-            var entities = new Entities();
+            var entities = new Entities(new DbContextOptionsBuilder<Entities>()
+                .UseInMemoryDatabase("Flights")
+                .Options);
 
             //Declaring a new Flight into a variable for use into Arrange
             var flight = new Flight(3);
@@ -17,9 +20,7 @@ namespace Application.Tests
             // Arrange: Add a new Flight to the Flights DbSet in the DbContext
             entities.Flights.Add(flight);
 
-            //entities.SaveChanges(); // Save changes to persist the new Flight
-
-
+            
             // Arrange: Create an instance of the BookingService
             var bookingService = new BookingService(entities: entities);
 

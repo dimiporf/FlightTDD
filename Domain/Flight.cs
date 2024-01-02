@@ -23,6 +23,8 @@ namespace Domain
         {
             RemainingNumberOfSeats = seatCapacity;
         }
+        //Empty contructor for use InMemory DbContext
+        Flight() { }
 
         // Method to book a certain number of seats for a passenger
         public object? Book(string passengerEmail, int numberOfSeats)
