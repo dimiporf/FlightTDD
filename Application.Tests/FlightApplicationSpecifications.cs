@@ -1,3 +1,4 @@
+using Domain;
 using FluentAssertions;
 
 namespace Application.Tests
@@ -7,23 +8,30 @@ namespace Application.Tests
         [Fact]
         public void Books_flights()
         {
-            
-            
+            // Arrange: Create an instance of the Entities DbContext
             var entities = new Entities();
-            entities.Flights.Add(new Flight(3));
+
+            //Declaring a new Flight into a variable for use into Arrange
+            var flight = new Flight(3);
+
+            // Arrange: Add a new Flight to the Flights DbSet in the DbContext
+            entities.Flights.Add(flight);
+
+            //entities.SaveChanges(); // Save changes to persist the new Flight
+
 
             // Arrange: Create an instance of the BookingService
             var bookingService = new BookingService(entities: entities);
 
             // Act: Invoke the Book method on the BookingService with a dummy BookDto
             bookingService.Book(new BookDto(
-                flightId: Guid.NewGuid(),
+                flightId: flight.Id,
                 passengerEmail: "dimiporf@live.com",
                 numberOfSeats: 2
                 ));
 
             // Assert: Check that the FindBookings method returns a collection containing an equivalent BookingRm object
-            bookingService.FindBookings().Should().ContainEquivalentOf(
+            bookingService.FindBookings(flight.Id).Should().ContainEquivalentOf(
                 new BookingRm(
                     passengerEmail: "dimiporf@live.com",
                 numberOfSeats: 2
@@ -47,7 +55,7 @@ namespace Application.Tests
         }
 
         // Simulates finding bookings
-        public IEnumerable<BookingRm> FindBookings()
+        public IEnumerable<BookingRm> FindBookings(Guid flightId)
         {
             // In a real-world scenario, this method would query the database or other storage to retrieve bookings.
             // For now, let's return a dummy collection containing a BookingRm object.

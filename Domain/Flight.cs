@@ -16,6 +16,8 @@ namespace Domain
         // The number of remaining seats on the flight
         public int RemainingNumberOfSeats { get; set; }
 
+        public Guid Id { get; } // Add the Id property
+
         // Constructor to initialize the flight with a given seat capacity
         public Flight(int seatCapacity)
         {
