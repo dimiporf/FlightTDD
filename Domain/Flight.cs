@@ -24,6 +24,7 @@ namespace Domain
             RemainingNumberOfSeats = seatCapacity;
         }
         //Empty contructor for use InMemory DbContext
+        [Obsolete("Needed by EF")]
         Flight() { }
 
         // Method to book a certain number of seats for a passenger
