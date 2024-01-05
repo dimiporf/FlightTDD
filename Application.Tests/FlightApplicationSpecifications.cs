@@ -7,15 +7,24 @@ namespace Application.Tests
 {
     public class FlightApplicationSpecifications
     {
+        // (Moved here after refactoring -->
+        // Arrange: Create an instance of the Entities DbContext
+        readonly Entities entities = new Entities(new DbContextOptionsBuilder<Entities>()
+                .UseInMemoryDatabase("Flights")
+                .Options);
+
+        readonly BookingService bookingService;
+        public FlightApplicationSpecifications()
+        {
+            bookingService = new BookingService(entities: entities);
+        }
+
+
         [Theory]
         [InlineData("dimiporf@live.com", 2)]
         [InlineData("porfidim@live.com", 2)]
         public void Books_flights(string passengerEmail, int numberOfSeats)
         {
-            // Arrange: Create an instance of the Entities DbContext
-            var entities = new Entities(new DbContextOptionsBuilder<Entities>()
-                .UseInMemoryDatabase("Flights")
-                .Options);
 
             //Declaring a new Flight into a variable for use into Arrange
             var flight = new Flight(3);
@@ -25,7 +34,8 @@ namespace Application.Tests
 
 
             // Arrange: Create an instance of the BookingService
-            var bookingService = new BookingService(entities);
+            // var bookingService = new BookingService(entities);
+            // Moved outside of this scope for shared use
 
             // Act: Invoke the Book method on the BookingService with a dummy BookDto
             bookingService.Book(new BookDto(
@@ -43,8 +53,43 @@ namespace Application.Tests
                 );
         }
 
+        [Fact]
+        public void Cancels_booking()
+        {
+            // Given
+            // Arrange: Create an instance of the Entities DbContext
+            // (var entities = new Entities(new DbContextOptionsBuilder<Entities>()
+            //    .UseInMemoryDatabase("Flights")
+            //    .Options);
+            // Moved outside of this scope for shared use
+
+            var flight = new Flight(3);
+            entities.Flights.Add(flight);
+
+            // Moved outside of this scope for shared use
+            // var bookingService = new BookingService(entities);
+
+            // Act: Book seats on the flight
+            bookingService.Book(new BookDto(
+                flightId: flight.Id,
+                passengerEmail: "dimiporf@live.com",
+                numberOfSeats: 2));
+
+            // When: Cancel booked seats
+            bookingService.CancelBooking(
+                new CancelBookingDto(
+                    flightId: flight.Id,
+                    passengerEmail: "dimiporf@live.com",
+                    numberOfSeats: 2)
+                );
+
+            // Then: Verify the remaining number of seats
+            bookingService.GetRemainingNumberOfSeatsFor(flight.Id)
+                .Should().Be(3);
+        }
     }
-}
+
+    }
 
 
 

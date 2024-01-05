@@ -38,5 +38,19 @@ namespace Application
             ) ?? Enumerable.Empty<BookingRm>();
             // If the flight is not found or has no bookings, return an empty collection of BookingRm.
         }
+
+        public void CancelBooking(CancelBookingDto cancelBookingDto)
+        {
+            // Implementation details for canceling a booking go here
+            // Use cancelBookingDto properties (FlightId, PassengerEmail, NumberOfSeats) for cancellation logic
+        }
+
+        // Retrieves the remaining number of seats for a flight identified by its unique identifier
+        public object GetRemainingNumberOfSeatsFor(Guid id)
+        {
+            // Implementation details for getting the remaining number of seats go here
+            // Use the provided id to query and calculate the remaining seats
+            return 3; // Placeholder value, replace with actual logic
+        }
     }
 }
