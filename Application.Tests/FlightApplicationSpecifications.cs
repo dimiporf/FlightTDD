@@ -23,7 +23,7 @@ namespace Application.Tests
         [Theory]
         [InlineData("dimiporf@live.com", 2)]
         [InlineData("porfidim@live.com", 2)]
-        public void Books_flights(string passengerEmail, int numberOfSeats)
+        public void Remembers_bookings(string passengerEmail, int numberOfSeats)
         {
 
             //Declaring a new Flight into a variable for use into Arrange
@@ -57,7 +57,7 @@ namespace Application.Tests
         [InlineData(3)]
         [InlineData(10)]
         [InlineData(7)]
-        public void Cancels_booking(int initialCapacity)
+        public void Frees_up_seats_after_booking(int initialCapacity)
         {
             // Given
             // Arrange: Create an instance of the Entities DbContext
