@@ -39,18 +39,32 @@ namespace Application
             // If the flight is not found or has no bookings, return an empty collection of BookingRm.
         }
 
+        // Cancels a booking based on the provided cancellation details
         public void CancelBooking(CancelBookingDto cancelBookingDto)
         {
             // Implementation details for canceling a booking go here
             // Use cancelBookingDto properties (FlightId, PassengerEmail, NumberOfSeats) for cancellation logic
+
+            // Retrieve the flight with the specified FlightId from the DbContext
+            var flight = Entities.Flights.Find(cancelBookingDto.FlightId);
+
+            // If the flight is found, cancel the booking, and save changes to the database
+            if (flight != null)
+            {
+                flight.CancelBooking(cancelBookingDto.PassengerEmail, cancelBookingDto.NumberOfSeats);
+                Entities.SaveChanges();
+            }
         }
 
         // Retrieves the remaining number of seats for a flight identified by its unique identifier
-        public object GetRemainingNumberOfSeatsFor(Guid id)
+        public object GetRemainingNumberOfSeatsFor(Guid flightId)
         {
             // Implementation details for getting the remaining number of seats go here
             // Use the provided id to query and calculate the remaining seats
-            return 3; // Placeholder value, replace with actual logic
+
+            // Retrieve the flight with the specified flightId from the DbContext and return the remaining seats
+            return Entities.Flights.Find(flightId)?.RemainingNumberOfSeats;
+            // Note: In a real-world scenario, you might want to handle cases where the flight is not found.
         }
     }
 }

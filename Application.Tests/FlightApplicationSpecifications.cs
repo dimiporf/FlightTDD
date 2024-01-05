@@ -53,8 +53,11 @@ namespace Application.Tests
                 );
         }
 
-        [Fact]
-        public void Cancels_booking()
+        [Theory]
+        [InlineData(3)]
+        [InlineData(10)]
+        [InlineData(7)]
+        public void Cancels_booking(int initialCapacity)
         {
             // Given
             // Arrange: Create an instance of the Entities DbContext
@@ -63,7 +66,7 @@ namespace Application.Tests
             //    .Options);
             // Moved outside of this scope for shared use
 
-            var flight = new Flight(3);
+            var flight = new Flight(initialCapacity);
             entities.Flights.Add(flight);
 
             // Moved outside of this scope for shared use
@@ -85,7 +88,7 @@ namespace Application.Tests
 
             // Then: Verify the remaining number of seats
             bookingService.GetRemainingNumberOfSeatsFor(flight.Id)
-                .Should().Be(3);
+                .Should().Be(initialCapacity);
         }
     }
 

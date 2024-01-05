@@ -9,6 +9,10 @@ namespace Application
     
     public class CancelBookingDto
     {
+        public Guid  FlightId { get; set; }
+        public string PassengerEmail { get; set; }
+        public int NumberOfSeats { get; set; }
+
         // Constructor for CancelBookingDto class
         public CancelBookingDto(
             Guid flightId,           // Unique identifier of the flight
@@ -16,7 +20,9 @@ namespace Application
         int numberOfSeats        // Number of seats to cancel
             )
         {
-
+            FlightId = flightId;
+            PassengerEmail = passengerEmail;
+            NumberOfSeats = numberOfSeats;
         }
     }
 }
